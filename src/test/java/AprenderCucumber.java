@@ -12,19 +12,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AprenderCucumber {
-    @Given("que criei o arquivo corretamente")
+    @Given("^que criei o arquivo corretamente$")
     public void que_criei_o_arquivo_corretamente() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
-    @When("executá-lo")
+    @When("^executá-lo$")
     public void executá_lo() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
-    @Then("a especificação deve finalizar com sucesso")
+    @Then("^a especificação deve finalizar com sucesso$")
     public void a_especificação_deve_finalizar_com_sucesso() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
@@ -60,16 +60,21 @@ public class AprenderCucumber {
         cal.set(Calendar.YEAR, ano);
         entrega = cal.getTime();
     }
-    @Quando("a entrega atrasar em {int} dias")
-    public void a_entrega_atrasar_em_dias(Integer int1) {
+    @Quando("^a entrega atrasar em (\\d+) (dia|dias|mes|meses)$")
+    public void a_entrega_atrasar_em_dias(Integer int1, String tempo) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(entrega);
-        cal.add(Calendar.DAY_OF_MONTH, int1);
+        if(tempo.equals("dias")) {
+            cal.add(Calendar.DAY_OF_MONTH, int1);
+        }
+        if(tempo.equals("meses")) {
+            cal.add(Calendar.MONTH, int1);
+        }
         entrega = cal.getTime();
     }
-    @Então("a entrega será efetuada em (\\d{2}\\/\\d{2}\\/\\d{4})")
+    @Então("^a entrega será efetuada em (\\d{2}\\/\\d{2}\\/\\d{4})$")
     public void a_entrega_será_efetuada_em(String data) {
-        DateFormat format = new SimpleDateFormat("dd/MMMM/yyyy");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = format.format(entrega);
         Assert.assertEquals(data, dataFormatada);
     }
