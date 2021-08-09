@@ -15,6 +15,7 @@ public class AlugarFilmeSteps {
     private Filme filme;
     private AluguelService aluguel = new AluguelService();
     private NotaAluguel nota;
+    private String erro;
 
     @Dado("um filme com estoque de {int} unidades")
     public void umFilmeComEstoqueDeUnidades(Integer int1) {
@@ -29,7 +30,12 @@ public class AlugarFilmeSteps {
 
     @Quando("alugar")
     public void alugar() {
-        nota = aluguel.alugar(filme);
+        try {
+            nota = aluguel.alugar(filme);
+        } catch (RuntimeException e){
+            erro = e.getMessage();
+        }
+
     }
 
     @Então("o preço do aluguel será R$ {int}")
@@ -58,8 +64,8 @@ public class AlugarFilmeSteps {
         softAssert.assertAll();
     }
 
-    @Então("o estoque do filme será {int} unidade")
-    public void oEstoqueDoFilmeSeráUnidade(int int1) {
+    @Então("o estoque do filme será {int} unidades")
+    public void oEstoqueDoFilmeSeráUnidades(int int1) {
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertEquals(int1, filme.getEstoque(), "Validação quantidade estoque");
@@ -67,4 +73,12 @@ public class AlugarFilmeSteps {
         softAssert.assertAll();
     }
 
+    @Então("não será possivel por falta de estoque")
+    public void nãoSeráPossivelPorFaltaDeEstoque() {
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals("Filme sem estoque", erro, "Validação filme sem estoque");
+
+        softAssert.assertAll();
+    }
 }
