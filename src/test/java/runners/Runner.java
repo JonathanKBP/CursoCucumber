@@ -6,9 +6,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src\\test\\resources\\features\\aprender_cucumber.feature",
+        //features = "src\\test\\resources\\features\\aprender_cucumber.feature",
+        features = "src\\test\\resources\\features\\alugar_filme.feature",
         glue = "steps",
-        //	tags = {"@unitários", "not @ignore"},
+        tags = "not @ignore",
         plugin = "pretty",
         monochrome = false,
         snippets = CucumberOptions.SnippetType.CAMELCASE,

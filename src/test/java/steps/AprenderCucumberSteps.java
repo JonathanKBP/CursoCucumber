@@ -18,20 +18,17 @@ import java.util.Date;
 public class AprenderCucumberSteps {
     @Given("^que criei o arquivo corretamente$")
     public void queCrieiOArquivoCorretamente() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
     }
 
     @When("^executá-lo$")
     public void executáLo() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
     }
 
     @Then("^a especificação deve finalizar com sucesso$")
     public void aEspecificaçãoDeveFinalizarComSucesso() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
     }
 
     private int contador = 0;
