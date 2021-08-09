@@ -2,6 +2,7 @@ package steps;
 
 import entidades.Filme;
 import entidades.NotaAluguel;
+import entidades.TipoAluguel;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
@@ -20,7 +21,7 @@ public class AlugarFilmeSteps {
     private AluguelService aluguel = new AluguelService();
     private NotaAluguel nota;
     private String erro;
-    private String tipoAluguel;
+    private TipoAluguel tipoAluguel = TipoAluguel.COMUM;
 
     @Dado("um filme com estoque de {int} unidades")
     public void umFilmeComEstoqueDeUnidades(Integer int1) {
@@ -72,7 +73,7 @@ public class AlugarFilmeSteps {
 
     @Dado("^que o tipo de aluguel seja (.*)$")
     public void queOTipoDeAluguelSejaExtendido(String tipo) {
-        tipoAluguel = tipo;
+        tipoAluguel = tipo.equals("semanal")? TipoAluguel.SEMANAL: tipo.equals("extendido")? TipoAluguel.EXTENDIDO: TipoAluguel.COMUM;
     }
 
     @Então("^a data de entrega será em (\\d+) dias?$")
