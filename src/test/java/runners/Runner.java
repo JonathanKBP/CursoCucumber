@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         features = "src\\test\\resources\\features\\alugar_filme.feature",
         glue = "steps",
         tags = "not @ignore",
-        plugin = "pretty",
+        plugin = {"pretty", "html:target/report-html", "json:target/report.json"},
         monochrome = false,
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         dryRun = false,
