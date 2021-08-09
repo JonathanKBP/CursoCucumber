@@ -16,6 +16,6 @@ import org.junit.runner.RunWith;
         dryRun = false,
         strict = false
 )
-public class Runner {
+public class RunnerTest {
 
 }
