@@ -105,8 +105,21 @@ public class InserirContasSteps {
         softAssert.assertAll();
     }
 
+    @Então("recebo a mensagem {string}")
+    public void receboAMensagem(String arg0) {
+        SoftAssert softAssert = new SoftAssert();
+
+        String texto = driver.findElement(By.xpath("//div[starts-with(@class, 'alert alert-')]")).getText();
+
+        softAssert.assertEquals(arg0, texto, "Validação da mensagem recebida");
+
+        softAssert.assertAll();
+    }
+
     @After
     public void fecharBrowser(){
         driver.quit();
     }
+
+
 }
