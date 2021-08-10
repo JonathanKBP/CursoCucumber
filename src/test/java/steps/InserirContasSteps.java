@@ -92,4 +92,15 @@ public class InserirContasSteps {
 
         softAssert.assertAll();
     }
+
+    @Então("sou notificado que já existe uma conta com esse nome")
+    public void souNotificadoQueJáExisteUmaContaComEsseNome() {
+        SoftAssert softAssert = new SoftAssert();
+
+        String texto = driver.findElement(By.xpath("//div[@class='alert alert-danger']")).getText();
+
+        softAssert.assertEquals("Já existe uma conta com esse nome!", texto, "Validação nome da conta repetido");
+
+        softAssert.assertAll();
+    }
 }
