@@ -3,7 +3,7 @@ package steps;
 import java.io.File;
 import java.io.IOException;
 
-import gherkin.ast.Scenario;
+import cucumber.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
@@ -18,8 +18,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.asserts.SoftAssert;
 import utils.Generator;
-
-import java.util.concurrent.TimeUnit;
 
 public class InserirContasSteps {
 
