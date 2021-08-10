@@ -77,7 +77,18 @@ public class InserirContasSteps {
 
         String texto = driver.findElement(By.xpath("//div[@class='alert alert-success']")).getText();
 
-        softAssert.assertEquals("Conta adicionada com sucesso!", texto, "Validação tela inicial");
+        softAssert.assertEquals("Conta adicionada com sucesso!", texto, "Validação conta inserida");
+
+        softAssert.assertAll();
+    }
+
+    @Então("sou notificado que o nome da conta é obrigatório")
+    public void souNotificadoQueONomeDaContaÉObrigatório() {
+        SoftAssert softAssert = new SoftAssert();
+
+        String texto = driver.findElement(By.xpath("//div[@class='alert alert-danger']")).getText();
+
+        softAssert.assertEquals("Informe o nome da conta", texto, "Validação nome em branco");
 
         softAssert.assertAll();
     }
