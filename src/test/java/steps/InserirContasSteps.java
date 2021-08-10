@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.After;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
@@ -102,5 +103,10 @@ public class InserirContasSteps {
         softAssert.assertEquals("Já existe uma conta com esse nome!", texto, "Validação nome da conta repetido");
 
         softAssert.assertAll();
+    }
+
+    @After
+    public void fecharBrowser(){
+        driver.quit();
     }
 }
