@@ -17,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.asserts.SoftAssert;
+import utils.Generator;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,93 +25,24 @@ public class InserirContasSteps {
 
     private WebDriver driver;
 
-    @Dado("que estou acessando a aplicação")
-    public void queEstouAcessandoAAplicação() {
+    @Dado("que desejo adicionar uma conta")
+    public void queDesejoAdicionarUmaConta() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Jonathan\\drivers\\chromedriver.exe");
-
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
         driver.get("https://seubarriga.wcaquino.me/login");
-    }
-
-    @Quando("informo o usuário {string}")
-    public void informoOUsuário(String string) {
-        driver.findElement(By.id("email")).sendKeys(string);
-    }
-
-    @Quando("a senha {string}")
-    public void aSenha(String string) {
-        driver.findElement(By.id("senha")).sendKeys(string);
-    }
-
-    @Quando("seleciono entrar")
-    public void selecionoEntrar() {
+        driver.findElement(By.id("email")).sendKeys("jkvin@gmail.com");
+        driver.findElement(By.name("senha")).sendKeys("jkevin");
         driver.findElement(By.tagName("button")).click();
-    }
-
-    @Então("visualizo a página inicial")
-    public void visualizoAPáginaInicial() {
-        SoftAssert softAssert = new SoftAssert();
-
-        String texto = driver.findElement(By.xpath("//div[@class='alert alert-success']")).getText();
-
-        softAssert.assertEquals("Bem vindo, Jkevin!", texto, "Validação tela inicial");
-
-        softAssert.assertAll();
-    }
-
-    @Quando("seleciono Contas")
-    public void selecionoContas() {
-       driver.findElement(By.linkText("Contas")).click();
-    }
-
-    @Quando("seleciono Adicionar")
-    public void selecionoAdicionar() {
+        driver.findElement(By.linkText("Contas")).click();
         driver.findElement(By.linkText("Adicionar")).click();
     }
 
-    @Quando("informo a conta {string}")
-    public void informoAConta(String string) {
-        driver.findElement(By.id("nome")).sendKeys(string);
-    }
-
-    @Quando("seleciono Salvar")
-    public void selecionoSalvar() {
+    @Quando("adiciono a conta {string}")
+    public void adicionoAConta(String arg0) {
+        driver.findElement(By.id("nome")).sendKeys(arg0);
         driver.findElement(By.tagName("button")).click();
-    }
-
-    @Então("a conta é inserida com sucesso")
-    public void aContaÉInseridaComSucesso() {
-        SoftAssert softAssert = new SoftAssert();
-
-        String texto = driver.findElement(By.xpath("//div[@class='alert alert-success']")).getText();
-
-        softAssert.assertEquals("Conta adicionada com sucesso!", texto, "Validação conta inserida");
-
-        softAssert.assertAll();
-    }
-
-    @Então("sou notificado que o nome da conta é obrigatório")
-    public void souNotificadoQueONomeDaContaÉObrigatório() {
-        SoftAssert softAssert = new SoftAssert();
-
-        String texto = driver.findElement(By.xpath("//div[@class='alert alert-danger']")).getText();
-
-        softAssert.assertEquals("Informe o nome da conta", texto, "Validação nome em branco");
-
-        softAssert.assertAll();
-    }
-
-    @Então("sou notificado que já existe uma conta com esse nome")
-    public void souNotificadoQueJáExisteUmaContaComEsseNome() {
-        SoftAssert softAssert = new SoftAssert();
-
-        String texto = driver.findElement(By.xpath("//div[@class='alert alert-danger']")).getText();
-
-        softAssert.assertEquals("Já existe uma conta com esse nome!", texto, "Validação nome da conta repetido");
-
-        softAssert.assertAll();
     }
 
     @Então("recebo a mensagem {string}")
@@ -129,20 +61,18 @@ public class InserirContasSteps {
         File file = ((TakesScreenshot)driver)
                 .getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(file, new File("target//screenshot//"
+            FileUtils.copyFile(file, new File("target\\screenshot\\"
                     + cenario.getName()
                     + "."
-                    + cenario.getName()
+                    + Generator.dataHoraParaArquivo()
                     + ".jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @After(order = 0)
+    @After(order = 0, value = "@funcionais")
     public void fecharBrowser(){
         driver.quit();
     }
-
-
 }
