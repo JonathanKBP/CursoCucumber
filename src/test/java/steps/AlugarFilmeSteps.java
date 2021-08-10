@@ -4,7 +4,6 @@ import entidades.Filme;
 import entidades.NotaAluguel;
 import entidades.TipoAluguel;
 import io.cucumber.java.pt.Dado;
-import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import io.cucumber.datatable.DataTable;
@@ -14,7 +13,6 @@ import utils.DateUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
