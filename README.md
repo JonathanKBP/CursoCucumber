@@ -26,7 +26,7 @@ Os casos de testes foram funcionais e unitários, e ainda foi desenvolvido uma a
 ```bash
 
   #Clonar o repositório
-  $ git clone https://github.com/JonathanKBP/TestSeleniumWebDriver.git
+  $ git clone https://github.com/JonathanKBP/TesteCucumberBDD.git
 
 ```
 <p align="center">
